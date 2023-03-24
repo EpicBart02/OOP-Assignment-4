@@ -84,4 +84,9 @@ public class Planet extends HeavenlyBody {
     }
     return in;
   }
+  public void removeMoon(Planet planet) {
+    for (Moon moon : planet.moons) {
+        moons.remove(moon);
+    }
+}
 }

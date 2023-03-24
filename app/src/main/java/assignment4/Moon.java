@@ -1,7 +1,7 @@
 package assignment4;
 
 /**
- * Moon class.
+ * Moon.
  */
 
 public class Moon extends HeavenlyBody {

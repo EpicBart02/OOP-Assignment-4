@@ -73,10 +73,22 @@ public class Star extends HeavenlyBody {
    * Printing
    */
   public String toString() {
-    String pin = "Star: " + getName() + " average radius " + getAvgRadiusInKm() + " \n "; 
+    String pin = getName() + getAvgRadiusInKm() + " \n "; 
     for (Planet i : planets) {
       pin += i;
     }
     return pin;
   }
+
+  public void removeStar(Star star) {
+    for (Planet planet : star.planets) {
+        removePlanet(planet);
+    }
+    star = null;
+}
+public void removePlanet(Planet planet) {
+    planet.removeMoon(planet);
+    planets.remove(planet);
+}
+
 }
