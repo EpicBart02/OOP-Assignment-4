@@ -26,10 +26,15 @@ public class Star extends HeavenlyBody {
    * Constructor for addPlanet.
    */
 
-  public Planet addPlanet(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
+  public void addPlanet(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
     Planet planet = new Planet(name, avgRadiusInKm, avgOrbitRadiusInKm);
     planets.add(planet);
-    return planet;
+    //return planet;
+  }
+
+
+  public ArrayList<Planet> getAllPlanets() {
+    return new ArrayList<>(planets);
   }
 
   /**
@@ -80,15 +85,15 @@ public class Star extends HeavenlyBody {
     return pin;
   }
 
-  public void removeStar(Star star) {
-    for (Planet planet : star.planets) {
-        removePlanet(planet);
-    }
-    star = null;
-}
+
 public void removePlanet(Planet planet) {
-    planet.removeMoon(planet);
-    planets.remove(planet);
+  for(Moon moon : planet.getAllMoons()){
+    planet.removeMoon(moon);
+  }
+  planets.remove(planet);
 }
 
 }
+/*public void removeMoon(Moon moon) {
+   moons.remove(moon);
+  }*/

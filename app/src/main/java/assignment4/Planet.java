@@ -28,9 +28,18 @@ public class Planet extends HeavenlyBody {
   }
   
   /**
+   * A getter for the arraylist filled with moons.
+   */
+  
+  public ArrayList<Moon> getAllMoons() {
+    return new ArrayList<>(moons);
+  }
+
+
+  /**
   * A method to add moons to the planet.
   */
-  
+
   public Moon addMoon(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
     if (avgRadiusInKm > super.getAvgRadiusInKm() / 2) {
       throw new IllegalArgumentException("Out of bounds!");
@@ -51,8 +60,7 @@ public class Planet extends HeavenlyBody {
   }
   
   /**
-  * Returns array.
-  */
+  * Not used atm:
   
   public HeavenlyBody[] getHeavenlyBodies() {
     HeavenlyBody[] copy = new HeavenlyBody[moons.size() + 1];
@@ -65,6 +73,7 @@ public class Planet extends HeavenlyBody {
     }
     return copy;
   }
+  */
   
   @Override
   protected void checkAvgRadiusInKm(int radius) {
@@ -84,9 +93,11 @@ public class Planet extends HeavenlyBody {
     }
     return in;
   }
-  public void removeMoon(Planet planet) {
-    for (Moon moon : planet.moons) {
-        moons.remove(moon);
-    }
+
+  /**
+   * Delete a moon from the arraylist.
+   */
+  public void removeMoon(Moon moon) {
+    moons.remove(moon);
 }
 }

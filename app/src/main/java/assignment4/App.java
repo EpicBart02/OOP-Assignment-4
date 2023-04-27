@@ -4,6 +4,8 @@
 
 package assignment4;
 
+import java.util.Scanner;
+
 /**
  * This is the generated Hello World Greeting App.
  */
@@ -25,6 +27,52 @@ public class App {
    */
   public static void main(String[] args) {
     App theApp = new App();
-    System.out.println(theApp.getGreeting());
+    menuMethods methods = new menuMethods();
+    methods.setAllStars();
+    fileHandler handle = new fileHandler();
+    Scanner scanner = new Scanner(System.in);
+
+    while(true){
+      System.out.println("1: add star");
+      System.out.println("2: remove star");
+      System.out.println("3: add planet");
+      System.out.println("4: remove planet");
+      System.out.println("5: add moon");
+      System.out.println("6: remove moon");
+      System.out.println("7: Save data");
+      System.out.println("8: Quit");
+
+      int num = scanner.nextInt();
+      scanner.nextLine();
+
+      switch(num){
+        case 1:
+        methods.createStar(scanner);
+        break;
+        case 2:
+        methods.removeStar(scanner);
+        break;
+        case 3:
+        methods.createPlanet(scanner);
+        break;
+        case 4:
+        methods.removePlanet(scanner);
+        case 5:
+        methods.createMoon(scanner);
+        break;
+        case 6:
+        methods.removeStar(scanner);
+        break;
+        case 7:
+        handle.setAllStars(methods.getAllStars());
+        handle.saveFile();
+        System.out.println("Done!");
+        break;
+        case 8:
+        System.exit(0);
+      }
+
+    }
+    //System.out.println(theApp.getGreeting());
   }
 }
