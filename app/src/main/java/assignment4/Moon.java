@@ -10,13 +10,11 @@ public class Moon extends HeavenlyBody {
 
   protected Moon(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
     super(name, avgRadiusInKm);
-    setName(name);
-    checkAvgRadiusInKm(avgRadiusInKm);
-    if (avgOrbitRadiusInKm < 60) {
-      throw new IllegalArgumentException("Orbit radius is out of bounds!");
-    } else {
-      this.avgOrbitRadiusInKm = avgOrbitRadiusInKm;
-    }
+    setavgOrbitRadiusInKm(avgOrbitRadiusInKm);
+  }
+
+  private void setavgOrbitRadiusInKm(double avgOrbit) {
+    this.avgOrbitRadiusInKm = avgOrbit;
   }
 
   public double getAvgOrbitRadiusInKm() {
@@ -30,7 +28,8 @@ public class Moon extends HeavenlyBody {
     }
   }
 
-  public String toString() {
-    return "--Moon:" + getName() + getAvgRadiusInKm() + getAvgOrbitRadiusInKm() +" \n ";
+  protected void printToString() {
+    System.out.println("Moon: " + this.getName() + ", average radius in km: " + this.getAvgRadiusInKm()
+    + ", " + "Average orbit radius: " + this.getAvgOrbitRadiusInKm());
   }
 }

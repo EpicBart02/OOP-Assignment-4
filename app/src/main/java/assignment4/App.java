@@ -26,11 +26,17 @@ public class App {
    * @param args Unused program arguments.
    */
   public static void main(String[] args) {
-    App theApp = new App();
+    
     menuMethods methods = new menuMethods();
-    methods.setAllStars();
     fileHandler handle = new fileHandler();
+    
+    handle.initializeSystem();
+    handle.loadFromFile();
+    methods.setAllStars(handle.getFileArray());
+
+    //I load the file before starting the while loop.
     Scanner scanner = new Scanner(System.in);
+    
 
     while(true){
       System.out.println("1: add star");
@@ -64,11 +70,14 @@ public class App {
         methods.removeStar(scanner);
         break;
         case 7:
+        //methods.saveFile(file);
         handle.setAllStars(methods.getAllStars());
         handle.saveFile();
-        System.out.println("Done!");
         break;
         case 8:
+        //handle.setAllStars(methods.getAllStars());
+        //handle.loadFromFile();
+        //methods.setAllStars(handle.getFileArray());
         System.exit(0);
       }
 

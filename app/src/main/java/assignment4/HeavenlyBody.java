@@ -6,8 +6,8 @@ public abstract class HeavenlyBody {
   private Integer avgRadiusInKm;
 
   protected HeavenlyBody(String newName, int newAvgRadius) {
-    this.name = newName;
-    this.avgRadiusInKm = newAvgRadius;
+    setName(newName);
+    setAvgRadiusInKm(newAvgRadius);
   }
 
   public String getName() {
@@ -32,18 +32,6 @@ public abstract class HeavenlyBody {
   
   protected abstract void checkAvgRadiusInKm(int radius);
   
-  public String toString() {
-    return getName() + "  " + getAvgRadiusInKm() + "km";
-  }
-  
-  public int compareTo(HeavenlyBody clk) {
-    if (getAvgRadiusInKm() == clk.getAvgRadiusInKm()) {
-      return 0;
-    } else if (getAvgRadiusInKm() > clk.getAvgRadiusInKm()) {
-      return 1;
-    } else {
-      return -1;
-    }
-  }
+  protected abstract void printToString();
 }
 

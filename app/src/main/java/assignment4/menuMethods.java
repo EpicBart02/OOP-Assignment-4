@@ -1,9 +1,5 @@
 package assignment4;
 
-
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -17,9 +13,8 @@ public class menuMethods {
   public ArrayList<Star> getAllStars() {
     return new ArrayList<>(system);
   }
-  
-  public void setAllStars() {
-    system = new ArrayList<>();
+  public void setAllStars(ArrayList<Star> stars) {
+    system = new ArrayList<>(stars);
   }
 
   Scanner scanner = new Scanner(System.in);
@@ -35,20 +30,12 @@ public class menuMethods {
     Star star = new Star(starName, starRadius);
     //If star already exists, throw an error.
 
-    for (Star allStar : system) {
-      if (allStar.getName() == star.getName()) {
-        throw new IllegalArgumentException("Star is already present, enter new information again,");
-      } else {
-        system.add(star);
-      }
-    }
-      
-   /* if(system.contains(star)) {
-    } else{
+    if(system.contains(star)) {
       throw new IllegalArgumentException("Star is already present, enter new information again,");
     }
-    system.add(star);*/
+    system.add(star);
   }
+  
   
   
   public void removeStar(Scanner inputLine) {
@@ -59,7 +46,7 @@ public class menuMethods {
     Iterator<Star> iterator = system.iterator();
     while(iterator.hasNext()) {
       Star star = iterator.next();
-      if(star.getName() == starName) {
+      if(star.getName().equals(starName)) {
         iterator.remove();
       }
     }
@@ -79,10 +66,11 @@ public class menuMethods {
     System.out.println("Please enter the average orbit radius: ");
     Integer planetOrbit = inputLine.nextInt();
     
+    Planet createdPlanet = new Planet(planetName, planetRadius, planetOrbit);
     
     for(Star allStars : system) {
-      if(allStars.getName() == planetInheretance) {
-        allStars.addPlanet(planetName, planetRadius, planetOrbit);
+      if(allStars.getName().equals(planetInheretance)) {
+        allStars.addPlanet(createdPlanet);
       }
     }
   }
@@ -97,9 +85,9 @@ public class menuMethods {
     String planetName = inputLine.nextLine();
     
     for(Star allStars: system) {
-      if(allStars.getName() == starName) {
+      if(allStars.getName().equals(starName)) {
         for(Planet allPlanet : allStars.getAllPlanets()) {
-          if(allPlanet.getName() == planetName) {
+          if(allPlanet.getName().equals(planetName)) {
             allStars.removePlanet(allPlanet);
           }
         }
@@ -123,12 +111,14 @@ public class menuMethods {
     
     System.out.println("Please enter the moons average orbit radius");
     Integer moonOrbit = inputLine.nextInt();
+
+    Moon createdMoon = new Moon(moonName, moonRadius, moonOrbit);
     
     for(Star allstars : system) {
-      if(allstars.getName() == starName) {
+      if(allstars.getName().equals(starName)) {
         for(Planet allPlanet : allstars.getAllPlanets()) {
-          if(allPlanet.getName() == planetName) {
-            allPlanet.addMoon(moonName, moonRadius, moonOrbit);
+          if(allPlanet.getName().equals(planetName)) {
+            allPlanet.addMoon(createdMoon);
           }
         }
       }
