@@ -42,22 +42,6 @@ public class Planet extends HeavenlyBody {
   public void removeMoon(Moon moon) {
     moons.remove(moon);
 }
-
-
-  /*public Moon addMoon(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
-    if (avgRadiusInKm > super.getAvgRadiusInKm() / 2) {
-      throw new IllegalArgumentException("Out of bounds!");
-    }
-    
-    Moon moon = new Moon(name, avgRadiusInKm, avgOrbitRadiusInKm);
-    for (HeavenlyBody i : moons) {
-      if (i.getName().equals(name))  {
-        throw new IllegalArgumentException("Moon is already present!");
-      }
-    }
-    moons.add(moon);
-    return moon;
-  } */
   
   /**
    * A getter and setter for avg orbit radius.
@@ -68,7 +52,11 @@ public class Planet extends HeavenlyBody {
   }
 
   private void setavgOrbitRadiusInKm(double avgOrbit) {
-    this.avgOrbitRadiusInKm = avgOrbit;
+    if (avgOrbit > 1000.0 || avgOrbit < 30000.0) {
+      this.avgOrbitRadiusInKm = avgOrbit;
+    } else {
+      throw new IllegalArgumentException("Choose another number so it doesnt collide");
+    }
   }
   
   @Override

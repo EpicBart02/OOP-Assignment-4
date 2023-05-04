@@ -29,7 +29,7 @@ public class App {
     
     menuMethods methods = new menuMethods();
     fileHandler handle = new fileHandler();
-    
+
     handle.initializeSystem();
     handle.loadFromFile();
     methods.setAllStars(handle.getFileArray());
@@ -47,6 +47,7 @@ public class App {
       System.out.println("6: remove moon");
       System.out.println("7: Save data");
       System.out.println("8: Quit");
+      System.out.println("9: sort by orbit");
 
       int num = scanner.nextInt();
       scanner.nextLine();
@@ -79,6 +80,9 @@ public class App {
         //handle.loadFromFile();
         //methods.setAllStars(handle.getFileArray());
         System.exit(0);
+        case 9:
+        methods.sortByOrbit();
+        break;
       }
 
     }

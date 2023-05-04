@@ -14,7 +14,11 @@ public class Moon extends HeavenlyBody {
   }
 
   private void setavgOrbitRadiusInKm(double avgOrbit) {
-    this.avgOrbitRadiusInKm = avgOrbit;
+    if (avgOrbit > 6.0 || avgOrbit < 15000.0) {
+      this.avgOrbitRadiusInKm = avgOrbit;
+    } else {
+      throw new IllegalArgumentException("Choose another number so it doesnt collide");
+    }
   }
 
   public double getAvgOrbitRadiusInKm() {

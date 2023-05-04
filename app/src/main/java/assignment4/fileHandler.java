@@ -36,7 +36,7 @@ public class fileHandler {
         for (Planet allPlanets : allStars.getAllPlanets()) {
           writeData.println("-" + allPlanets.getName() + ":" + allPlanets.getAvgRadiusInKm() + ":" + allPlanets.getAvgOrbitRadiusInKm());
           for (Moon allMoon : allPlanets.getAllMoons()) {
-            writeData.println("--" + allMoon.getName() + ":" + allMoon.getAvgOrbitRadiusInKm() + ":" + allMoon.getAvgOrbitRadiusInKm());
+            writeData.println("--" + allMoon.getName() + ":" + allMoon.getAvgRadiusInKm() + ":" + allMoon.getAvgOrbitRadiusInKm());
           }
         }
       }

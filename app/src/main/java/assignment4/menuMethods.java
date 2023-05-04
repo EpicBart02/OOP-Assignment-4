@@ -1,7 +1,10 @@
 package assignment4;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 public class menuMethods {
@@ -16,7 +19,7 @@ public class menuMethods {
   public void setAllStars(ArrayList<Star> stars) {
     system = new ArrayList<>(stars);
   }
-
+  
   Scanner scanner = new Scanner(System.in);
   
   public void createStar(Scanner inputLine) {
@@ -29,7 +32,7 @@ public class menuMethods {
     
     Star star = new Star(starName, starRadius);
     //If star already exists, throw an error.
-
+    
     if(system.contains(star)) {
       throw new IllegalArgumentException("Star is already present, enter new information again,");
     }
@@ -111,7 +114,7 @@ public class menuMethods {
     
     System.out.println("Please enter the moons average orbit radius");
     Integer moonOrbit = inputLine.nextInt();
-
+    
     Moon createdMoon = new Moon(moonName, moonRadius, moonOrbit);
     
     for(Star allstars : system) {
@@ -151,5 +154,38 @@ public class menuMethods {
       }
     }
   }
+  
+  
+  public void sortByOrbit() {
+    for (Star star : system) {
+      List<Planet> allPlanet = star.getAllPlanets();
+      Collections.sort(allPlanet, new Comparator<Planet>() {
+        @Override
+        public int compare(Planet first_planet, Planet second_planet) {
+          System.out.println(first_planet.getName() + " " + second_planet.getName());
+          return Double.compare(first_planet.getAvgOrbitRadiusInKm(), second_planet.getAvgOrbitRadiusInKm());
+        }
+      });
+
+
+      for (Planet planet : allPlanet) {
+        List<Moon> moons = planet.getAllMoons();
+        Collections.sort(moons, new Comparator<Moon>() {
+          @Override
+          public int compare(Moon first_Moon, Moon second_Moon) {
+            System.out.println(first_Moon.getAvgOrbitRadiusInKm() + " " + second_Moon.getAvgOrbitRadiusInKm());
+            return Double.compare(first_Moon.getAvgOrbitRadiusInKm(), second_Moon.getAvgOrbitRadiusInKm());
+          }
+        });
+      }
+      for (Planet plan : allPlanet) {
+        System.out.println(plan.getName() + " " + plan.getAvgOrbitRadiusInKm());
+        for (Moon moon_t : plan.getAllMoons()) {
+          System.out.println(moon_t.getName() + " " + moon_t.getAvgOrbitRadiusInKm());
+        }
+      }
+    }
+  }
+
   
 }
