@@ -47,7 +47,8 @@ public class App {
       System.out.println("6: remove moon");
       System.out.println("7: Save data");
       System.out.println("8: Quit");
-      System.out.println("9: sort by orbit");
+      System.out.println("9: Sort by orbit");
+      System.out.println("10: Sort by size");
 
       int num = scanner.nextInt();
       scanner.nextLine();
@@ -82,6 +83,9 @@ public class App {
         System.exit(0);
         case 9:
         methods.sortByOrbit();
+        break;
+        case 10:
+        methods.sortBySize();
         break;
       }
 

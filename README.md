@@ -35,3 +35,6 @@ If you have already worked on the task in whole or part using your own gradle se
 
 ### Commits and Pushes during the website shutdown
 I made a lot of progress while the git was experiencing issues and therefore did not commit as much as i wanted. I removed a lot of unnessecary methods that resided from assignment 2, for example get heavenlybody. I also changed the way we add different heavenly bodies. Also i introduced a fileHandler class that takes care of the loading and saving of the .data file. menuMethods is the class that takes care of all the main methods for this project.
+
+### Sort by orbit and Sorty by size
+The way i built my "Sort by orbit" was to firstly print out the planets sorted by the smallest orbit radius first, and then each of their moons sorted by orbit aswell. I did the same thing for my sort by size method.

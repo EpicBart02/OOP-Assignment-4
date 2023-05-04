@@ -162,7 +162,7 @@ public class menuMethods {
       Collections.sort(allPlanet, new Comparator<Planet>() {
         @Override
         public int compare(Planet first_planet, Planet second_planet) {
-          System.out.println(first_planet.getName() + " " + second_planet.getName());
+          //System.out.println(first_planet.getName() + " " + second_planet.getName());
           return Double.compare(first_planet.getAvgOrbitRadiusInKm(), second_planet.getAvgOrbitRadiusInKm());
         }
       });
@@ -178,14 +178,57 @@ public class menuMethods {
           }
         });
       }
+      /*
       for (Planet plan : allPlanet) {
         System.out.println(plan.getName() + " " + plan.getAvgOrbitRadiusInKm());
         for (Moon moon_t : plan.getAllMoons()) {
           System.out.println(moon_t.getName() + " " + moon_t.getAvgOrbitRadiusInKm());
         }
-      }
+      }*/
     }
   }
 
   
+  public void sortBySize() {
+
+    Collections.sort(system, new Comparator<Star>() {
+      @Override
+      public int compare(Star firstStar, Star secondStar) {
+        return Integer.compare(firstStar.getAvgRadiusInKm(), secondStar.getAvgRadiusInKm());
+      }
+      
+    });
+
+    for (Star star : system) {
+      List<Planet> allPlanet = star.getAllPlanets();
+      Collections.sort(allPlanet, new Comparator<Planet>() {
+        @Override
+        public int compare(Planet first_planet, Planet second_planet) {
+          //System.out.println(first_planet.getName() + " " + second_planet.getName());
+          return Integer.compare(first_planet.getAvgRadiusInKm(), second_planet.getAvgRadiusInKm());
+        }
+      });
+
+
+      for (Planet planet : allPlanet) {
+        List<Moon> moons = planet.getAllMoons();
+        Collections.sort(moons, new Comparator<Moon>() {
+          @Override
+          public int compare(Moon first_Moon, Moon second_Moon) {
+            System.out.println(first_Moon.getAvgRadiusInKm() + " " + second_Moon.getAvgRadiusInKm());
+            return Double.compare(first_Moon.getAvgRadiusInKm(), second_Moon.getAvgRadiusInKm());
+          }
+        });
+      }
+      for (Star starr : system){
+        System.out.println(starr.getName() + " " + starr.getAvgRadiusInKm());
+        for (Planet plan : starr.getAllPlanets()) {
+          System.out.println("-" + plan.getName() + " " + plan.getAvgRadiusInKm());
+          for (Moon moon_t : plan.getAllMoons()) {
+            System.out.println("--" + moon_t.getName() + " " + moon_t.getAvgRadiusInKm());
+        }
+      }
+    }
+  }
+  }
 }
