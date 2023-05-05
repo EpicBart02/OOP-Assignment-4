@@ -33,15 +33,13 @@ public class Planet extends HeavenlyBody {
   * Two methods. One adds moon to the array list,
   * one removes moon from arraylist.
   */
-
-
   public void addMoon(Moon moon) {
     moons.add(moon);
   }
 
   public void removeMoon(Moon moon) {
     moons.remove(moon);
-}
+  }
   
   /**
    * A getter and setter for avg orbit radius.
@@ -63,17 +61,6 @@ public class Planet extends HeavenlyBody {
   protected void checkAvgRadiusInKm(int radius) {
     if (radius < 2000 || radius > 200000) {
       throw new IllegalArgumentException("Radius is out of bounds!");
-    }
-  }
-  
-  /**
-  * Printing.
-  */
-  protected void printToString() {
-    System.out.println("Planet:" + getName() + " average radius " + getAvgRadiusInKm() + "km " + 
-    "average orbit radius " + getAvgOrbitRadiusInKm() + "km" + " \n ");
-    for (Moon i : moons) {
-      i.toString();
     }
   }
 

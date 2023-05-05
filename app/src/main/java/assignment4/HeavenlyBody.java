@@ -1,5 +1,8 @@
 package assignment4;
 
+/**
+ * Abstract class for the different heavenly bodies.
+ */
 public abstract class HeavenlyBody {
   
   private String name;
@@ -14,8 +17,11 @@ public abstract class HeavenlyBody {
     return name;
   }
 
+  /**
+   * SetName for heavenly bodies.
+   */
   public void setName(String newName) {
-    if (newName == null || newName == "") {
+    if (newName == null || newName.equals("")) {
       throw new IllegalArgumentException("Name cant be null or empty!");
     } else {
       this.name = newName;
@@ -32,6 +38,5 @@ public abstract class HeavenlyBody {
   
   protected abstract void checkAvgRadiusInKm(int radius);
   
-  protected abstract void printToString();
 }
 

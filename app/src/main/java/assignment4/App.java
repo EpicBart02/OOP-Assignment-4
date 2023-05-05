@@ -27,8 +27,8 @@ public class App {
    */
   public static void main(String[] args) {
     
-    menuMethods methods = new menuMethods();
-    fileHandler handle = new fileHandler();
+    MenuMethods methods = new MenuMethods();
+    FileHandler handle = new FileHandler();
 
     handle.initializeSystem();
     handle.loadFromFile();
@@ -38,7 +38,7 @@ public class App {
     Scanner scanner = new Scanner(System.in);
     
 
-    while(true){
+    while (true) {
       System.out.println("1: add star");
       System.out.println("2: remove star");
       System.out.println("3: add planet");
@@ -46,47 +46,50 @@ public class App {
       System.out.println("5: add moon");
       System.out.println("6: remove moon");
       System.out.println("7: Save data");
-      System.out.println("8: Quit");
+      System.out.println("8: Sort by size");
       System.out.println("9: Sort by orbit");
-      System.out.println("10: Sort by size");
+      System.out.println("10: Quit the application");
 
       int num = scanner.nextInt();
       scanner.nextLine();
 
-      switch(num){
+      switch (num) {
         case 1:
-        methods.createStar(scanner);
-        break;
+          methods.createStar(scanner);
+          break;
         case 2:
-        methods.removeStar(scanner);
-        break;
+          methods.removeStar(scanner);
+          break;
         case 3:
-        methods.createPlanet(scanner);
-        break;
+          methods.createPlanet(scanner);
+          break;
         case 4:
-        methods.removePlanet(scanner);
+          methods.removePlanet(scanner);
+          break;
         case 5:
-        methods.createMoon(scanner);
-        break;
+          methods.createMoon(scanner);
+          break;
         case 6:
-        methods.removeStar(scanner);
-        break;
+          methods.removeStar(scanner);
+          break;
         case 7:
-        handle.setAllStars(methods.getAllStars());
-        handle.saveFile();
-        break;
+          handle.setAllStars(methods.getAllStars());
+          handle.saveFile();
+          break;
         case 8:
-        System.out.println("Thank you for using my app! May the 4th be with you.");
-        System.exit(0);
+          methods.sortBySize();
+          break;
         case 9:
-        methods.sortByOrbit();
-        break;
+          methods.sortByOrbit();
+          break;
         case 10:
-        methods.sortBySize();
-        break;
+          System.out.println("Thank you for using my app! May the 4th be with you.");
+          System.exit(0);
+          break;
+        default:
+          System.out.println("How did you even get here?");
       }
 
     }
-    //System.out.println(theApp.getGreeting());
   }
 }

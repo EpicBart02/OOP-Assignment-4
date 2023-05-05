@@ -6,17 +6,19 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class fileHandler {
+/**
+ * This class is made to handle loading and 
+ * saving for my application.
+ */
+public class FileHandler {
   
   private ArrayList<Star> system;
   
-  Scanner scanner = new Scanner(System.in);
-  
-  public ArrayList<Star> getFileArray(){
+  public ArrayList<Star> getFileArray() {
     return new ArrayList<>(system);
   }
 
-  public void setAllStars(ArrayList<Star> stars){
+  public void setAllStars(ArrayList<Star> stars) {
     system = new ArrayList<>(stars);
   }
 
@@ -24,8 +26,11 @@ public class fileHandler {
     system = new ArrayList<>();
   }
 
-
-
+  /**
+   * This is my save file method.
+   * It works by reading my array files and depending what type of heavenly body it is,
+   * it writes them down with no or a maximum of two dashes followed by their information.
+   */
   public void saveFile() {
     try {
       File savedata = new File("solarsystems.data");
@@ -34,9 +39,11 @@ public class fileHandler {
       for (Star allStars : system) {
         writeData.println(allStars.getName() + ":" + allStars.getAvgRadiusInKm());
         for (Planet allPlanets : allStars.getAllPlanets()) {
-          writeData.println("-" + allPlanets.getName() + ":" + allPlanets.getAvgRadiusInKm() + ":" + allPlanets.getAvgOrbitRadiusInKm());
+          writeData.println("-" + allPlanets.getName() + ":" + allPlanets.getAvgRadiusInKm() + ":" 
+              + allPlanets.getAvgOrbitRadiusInKm());
           for (Moon allMoon : allPlanets.getAllMoons()) {
-            writeData.println("--" + allMoon.getName() + ":" + allMoon.getAvgRadiusInKm() + ":" + allMoon.getAvgOrbitRadiusInKm());
+            writeData.println("--" + allMoon.getName() + ":" + allMoon.getAvgRadiusInKm() + ":" 
+                + allMoon.getAvgOrbitRadiusInKm());
           }
         }
       }
@@ -47,6 +54,14 @@ public class fileHandler {
     }
   }
 
+
+  /**
+   * This is my loading method.
+   * It works by first initializing currentStar and currentPlanet to null, 
+   * and then it scans and tries to find out what type of string it scanned.
+   * We deduce this by dashes, 0 dashes = 0 depth and that means star.
+   * 1 Dash = 1 depth which means planet, and 2 dashes means 2 depth with in turn means moon.
+   */
 
   public void loadFromFile() {
     try {

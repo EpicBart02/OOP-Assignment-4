@@ -31,9 +31,4 @@ public class Moon extends HeavenlyBody {
       throw new IllegalArgumentException("Radius is out of bounds!");
     }
   }
-
-  protected void printToString() {
-    System.out.println("Moon: " + this.getName() + ", average radius in km: " + this.getAvgRadiusInKm()
-    + ", " + "Average orbit radius: " + this.getAvgOrbitRadiusInKm());
-  }
 }

@@ -7,7 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class menuMethods {
+/**
+ * Class for handling all add, delete and sort methods for the app.
+ */
+public class MenuMethods {
   
   private ArrayList<Star> system;
   
@@ -16,12 +19,14 @@ public class menuMethods {
   public ArrayList<Star> getAllStars() {
     return new ArrayList<>(system);
   }
+
   public void setAllStars(ArrayList<Star> stars) {
     system = new ArrayList<>(stars);
   }
   
-  Scanner scanner = new Scanner(System.in);
-  
+  /**
+   * Create star method.
+   */
   public void createStar(Scanner inputLine) {
     
     System.out.println("Please enter the name for the star: ");
@@ -33,29 +38,34 @@ public class menuMethods {
     Star star = new Star(starName, starRadius);
     //If star already exists, throw an error.
     
-    if(system.contains(star)) {
+    if (system.contains(star)) {
       throw new IllegalArgumentException("Star is already present, enter new information again,");
     }
     system.add(star);
   }
   
   
-  
+  /**
+   * Remove star method.
+   */
   public void removeStar(Scanner inputLine) {
     System.out.println("Enter the name of the star you want to delete: ");
     String starName = inputLine.nextLine();
     
-    //Searching for a star with the same name in the system using iterator. If a match is found, we delete it from the system.
+    /*Searching for a star with the same name in the system using iterator.
+    If a match is found, we delete it from the system.*/
     Iterator<Star> iterator = system.iterator();
-    while(iterator.hasNext()) {
+    while (iterator.hasNext()) {
       Star star = iterator.next();
-      if(star.getName().equals(starName)) {
+      if (star.getName().equals(starName)) {
         iterator.remove();
       }
     }
   }
   
-  
+  /**
+   * Create planet method, takes inputs.
+   */
   public void createPlanet(Scanner inputLine) {
     System.out.println("Please enter which star this planet belongs to: ");
     String planetInheretance = inputLine.nextLine();
@@ -71,14 +81,16 @@ public class menuMethods {
     
     Planet createdPlanet = new Planet(planetName, planetRadius, planetOrbit);
     
-    for(Star allStars : system) {
-      if(allStars.getName().equals(planetInheretance)) {
+    for (Star allStars : system) {
+      if (allStars.getName().equals(planetInheretance)) {
         allStars.addPlanet(createdPlanet);
       }
     }
   }
   
-  
+  /**
+   * Remove planet method, takes input aswell.
+   */
   public void removePlanet(Scanner inputLine) {
     
     System.out.println("Please enter the name of the Star where the planet resides: ");
@@ -87,10 +99,10 @@ public class menuMethods {
     System.out.println("Please enter the name of the planet you want to delete: ");
     String planetName = inputLine.nextLine();
     
-    for(Star allStars: system) {
-      if(allStars.getName().equals(starName)) {
-        for(Planet allPlanet : allStars.getAllPlanets()) {
-          if(allPlanet.getName().equals(planetName)) {
+    for (Star allStars : system) {
+      if (allStars.getName().equals(starName)) {
+        for (Planet allPlanet : allStars.getAllPlanets()) {
+          if (allPlanet.getName().equals(planetName)) {
             allStars.removePlanet(allPlanet);
           }
         }
@@ -98,7 +110,9 @@ public class menuMethods {
     }
   }
   
-  
+  /**
+   * Create moon method.
+   */
   public void createMoon(Scanner inputLine) {
     System.out.println("Please enter the name of the star the moon belongs to: ");
     String starName = inputLine.nextLine();
@@ -117,10 +131,10 @@ public class menuMethods {
     
     Moon createdMoon = new Moon(moonName, moonRadius, moonOrbit);
     
-    for(Star allstars : system) {
-      if(allstars.getName().equals(starName)) {
-        for(Planet allPlanet : allstars.getAllPlanets()) {
-          if(allPlanet.getName().equals(planetName)) {
+    for (Star allstars : system) {
+      if (allstars.getName().equals(starName)) {
+        for (Planet allPlanet : allstars.getAllPlanets()) {
+          if (allPlanet.getName().equals(planetName)) {
             allPlanet.addMoon(createdMoon);
           }
         }
@@ -129,6 +143,9 @@ public class menuMethods {
     
   }
   
+  /**
+   * Remove moon method.
+   */
   public void removeMoon(Scanner inputLine) {
     
     System.out.println("Please enter the name of the star the moon belongs to: ");
@@ -140,12 +157,12 @@ public class menuMethods {
     System.out.println("Please enter the name of the moon: ");
     String moonName = inputLine.nextLine();
     
-    for(Star allstars : system) {
-      if(allstars.getName() == starName) {
-        for(Planet allPlanet : allstars.getAllPlanets()) {
-          if(allPlanet.getName() == planetName) {
-            for(Moon moons : allPlanet.getAllMoons()) {
-              if(moons.getName() == moonName) {
+    for (Star allstars : system) {
+      if (allstars.getName().equals(starName)) {
+        for (Planet allPlanet : allstars.getAllPlanets()) {
+          if (allPlanet.getName().equals(planetName)) {
+            for (Moon moons : allPlanet.getAllMoons()) {
+              if (moons.getName().equals(moonName)) {
                 allPlanet.removeMoon(moons);
               }
             }
@@ -165,8 +182,8 @@ public class menuMethods {
       List<Planet> allPlanet = star.getAllPlanets();
       Collections.sort(allPlanet, new Comparator<Planet>() {
         @Override
-        public int compare(Planet first_planet, Planet second_planet) {
-          return Double.compare(first_planet.getAvgOrbitRadiusInKm(), second_planet.getAvgOrbitRadiusInKm());
+        public int compare(Planet firstPlanet, Planet secondPlanet) {
+          return Double.compare(firstPlanet.getAvgOrbitRadiusInKm(), secondPlanet.getAvgOrbitRadiusInKm());
         }
       });
 
@@ -176,9 +193,9 @@ public class menuMethods {
         List<Moon> moons = planet.getAllMoons();
         Collections.sort(moons, new Comparator<Moon>() {
           @Override
-          public int compare(Moon first_Moon, Moon second_Moon) {
-            System.out.println(first_Moon.getAvgOrbitRadiusInKm() + " " + second_Moon.getAvgOrbitRadiusInKm());
-            return Double.compare(first_Moon.getAvgOrbitRadiusInKm(), second_Moon.getAvgOrbitRadiusInKm());
+          public int compare(Moon firstMoon, Moon secondMoon) {
+            System.out.println(firstMoon.getAvgOrbitRadiusInKm() + " " + secondMoon.getAvgOrbitRadiusInKm());
+            return Double.compare(firstMoon.getAvgOrbitRadiusInKm(), secondMoon.getAvgOrbitRadiusInKm());
           }
         });
         //For each sorted planet, print out its sorted moon.
@@ -203,8 +220,8 @@ public class menuMethods {
       List<Planet> allPlanet = star.getAllPlanets();
       Collections.sort(allPlanet, new Comparator<Planet>() {
         @Override
-        public int compare(Planet first_planet, Planet second_planet) {
-          return Integer.compare(first_planet.getAvgRadiusInKm(), second_planet.getAvgRadiusInKm());
+        public int compare(Planet firstPlanet, Planet secondPlanet) {
+          return Integer.compare(firstPlanet.getAvgRadiusInKm(), secondPlanet.getAvgRadiusInKm());
         }
       });
 
@@ -213,9 +230,9 @@ public class menuMethods {
         List<Moon> moons = planet.getAllMoons();
         Collections.sort(moons, new Comparator<Moon>() {
           @Override
-          public int compare(Moon first_Moon, Moon second_Moon) {
-            System.out.println(first_Moon.getAvgRadiusInKm() + " " + second_Moon.getAvgRadiusInKm());
-            return Double.compare(first_Moon.getAvgRadiusInKm(), second_Moon.getAvgRadiusInKm());
+          public int compare(Moon firstMoon, Moon secondMoon) {
+            System.out.println(firstMoon.getAvgRadiusInKm() + " " + secondMoon.getAvgRadiusInKm());
+            return Double.compare(firstMoon.getAvgRadiusInKm(), secondMoon.getAvgRadiusInKm());
           }
         });
         System.out.println("-" + planet.getName() + ":" + planet.getAvgRadiusInKm());
@@ -223,6 +240,6 @@ public class menuMethods {
           System.out.println("--" + moon.getName() + ":" + moon.getAvgRadiusInKm());
         }
       }
+    }
   }
- }
 }
