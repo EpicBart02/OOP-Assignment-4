@@ -72,14 +72,11 @@ public class App {
         methods.removeStar(scanner);
         break;
         case 7:
-        //methods.saveFile(file);
         handle.setAllStars(methods.getAllStars());
         handle.saveFile();
         break;
         case 8:
-        //handle.setAllStars(methods.getAllStars());
-        //handle.loadFromFile();
-        //methods.setAllStars(handle.getFileArray());
+        System.out.println("Thank you for using my app! May the 4th be with you.");
         System.exit(0);
         case 9:
         methods.sortByOrbit();

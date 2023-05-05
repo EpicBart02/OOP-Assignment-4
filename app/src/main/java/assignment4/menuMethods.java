@@ -154,7 +154,11 @@ public class menuMethods {
       }
     }
   }
-  
+
+
+  /**
+   * Sorting everything by orbit radius.
+   */
   
   public void sortByOrbit() {
     for (Star star : system) {
@@ -162,12 +166,12 @@ public class menuMethods {
       Collections.sort(allPlanet, new Comparator<Planet>() {
         @Override
         public int compare(Planet first_planet, Planet second_planet) {
-          //System.out.println(first_planet.getName() + " " + second_planet.getName());
           return Double.compare(first_planet.getAvgOrbitRadiusInKm(), second_planet.getAvgOrbitRadiusInKm());
         }
       });
 
-
+      //sort out the stars planets and later on we will print them out.
+      System.out.println("Sorted planets for " + star.getName() + ":");
       for (Planet planet : allPlanet) {
         List<Moon> moons = planet.getAllMoons();
         Collections.sort(moons, new Comparator<Moon>() {
@@ -177,39 +181,34 @@ public class menuMethods {
             return Double.compare(first_Moon.getAvgOrbitRadiusInKm(), second_Moon.getAvgOrbitRadiusInKm());
           }
         });
-      }
-      /*
-      for (Planet plan : allPlanet) {
-        System.out.println(plan.getName() + " " + plan.getAvgOrbitRadiusInKm());
-        for (Moon moon_t : plan.getAllMoons()) {
-          System.out.println(moon_t.getName() + " " + moon_t.getAvgOrbitRadiusInKm());
+        //For each sorted planet, print out its sorted moon.
+        System.out.println("-" + planet.getName() + ":" + planet.getAvgOrbitRadiusInKm());
+        for (Moon moon : moons) {
+          System.out.println("--" + moon.getName() + ":" + moon.getAvgOrbitRadiusInKm());
         }
-      }*/
+      }
+
+
     }
   }
 
+
+  /**
+   * Sorting everything by size (avgRadiusInKm).
+   */
   
   public void sortBySize() {
-
-    Collections.sort(system, new Comparator<Star>() {
-      @Override
-      public int compare(Star firstStar, Star secondStar) {
-        return Integer.compare(firstStar.getAvgRadiusInKm(), secondStar.getAvgRadiusInKm());
-      }
-      
-    });
 
     for (Star star : system) {
       List<Planet> allPlanet = star.getAllPlanets();
       Collections.sort(allPlanet, new Comparator<Planet>() {
         @Override
         public int compare(Planet first_planet, Planet second_planet) {
-          //System.out.println(first_planet.getName() + " " + second_planet.getName());
           return Integer.compare(first_planet.getAvgRadiusInKm(), second_planet.getAvgRadiusInKm());
         }
       });
 
-
+      System.out.println("Sorted planets for " + star.getName() + ":");
       for (Planet planet : allPlanet) {
         List<Moon> moons = planet.getAllMoons();
         Collections.sort(moons, new Comparator<Moon>() {
@@ -219,16 +218,11 @@ public class menuMethods {
             return Double.compare(first_Moon.getAvgRadiusInKm(), second_Moon.getAvgRadiusInKm());
           }
         });
-      }
-      for (Star starr : system){
-        System.out.println(starr.getName() + " " + starr.getAvgRadiusInKm());
-        for (Planet plan : starr.getAllPlanets()) {
-          System.out.println("-" + plan.getName() + " " + plan.getAvgRadiusInKm());
-          for (Moon moon_t : plan.getAllMoons()) {
-            System.out.println("--" + moon_t.getName() + " " + moon_t.getAvgRadiusInKm());
+        System.out.println("-" + planet.getName() + ":" + planet.getAvgRadiusInKm());
+        for (Moon moon : moons) {
+          System.out.println("--" + moon.getName() + ":" + moon.getAvgRadiusInKm());
         }
       }
-    }
   }
-  }
+ }
 }
