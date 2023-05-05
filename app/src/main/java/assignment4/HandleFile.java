@@ -6,11 +6,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 /**
  * This class is made to handle loading and 
  * saving for my application.
  */
-public class FileHandler {
+public class HandleFile {
   
   private ArrayList<Star> system;
   

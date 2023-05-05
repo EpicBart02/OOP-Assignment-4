@@ -27,8 +27,8 @@ public class App {
    */
   public static void main(String[] args) {
     
-    MenuMethods methods = new MenuMethods();
-    FileHandler handle = new FileHandler();
+    MethodsMenu methods = new MethodsMenu();
+    HandleFile handle = new HandleFile();
 
     handle.initializeSystem();
     handle.loadFromFile();

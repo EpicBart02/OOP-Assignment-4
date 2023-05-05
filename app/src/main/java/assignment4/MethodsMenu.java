@@ -10,8 +10,8 @@ import java.util.Scanner;
 /**
  * Class for handling all add, delete and sort methods for the app.
  */
-public class MenuMethods {
-  
+public class MethodsMenu {
+
   private ArrayList<Star> system;
   
   
@@ -243,3 +243,4 @@ public class MenuMethods {
     }
   }
 }
+
