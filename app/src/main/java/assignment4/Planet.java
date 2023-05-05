@@ -17,53 +17,44 @@ public class Planet extends HeavenlyBody {
   
   protected Planet(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
     super(name, avgRadiusInKm);
-    setName(name);
-    checkAvgRadiusInKm(avgRadiusInKm);
-    if (avgOrbitRadiusInKm < 18000) {
-      throw new IllegalArgumentException("Orbit radius is out of bounds!");
-    } else {
-      this.avgOrbitRadiusInKm = avgOrbitRadiusInKm;
-    }
-    moons = new ArrayList<Moon>();
+    setavgOrbitRadiusInKm(avgOrbitRadiusInKm);
+    moons = new ArrayList<>();
   }
   
   /**
-  * A method to add moons to the planet.
-  */
+   * A getter for the arraylist filled with moons.
+   */
   
-  public Moon addMoon(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
-    if (avgRadiusInKm > super.getAvgRadiusInKm() / 2) {
-      throw new IllegalArgumentException("Out of bounds!");
-    }
-    
-    Moon moon = new Moon(name, avgRadiusInKm, avgOrbitRadiusInKm);
-    for (HeavenlyBody i : moons) {
-      if (i.getName().equals(name))  {
-        throw new IllegalArgumentException("Moon is already present!");
-      }
-    }
+  public ArrayList<Moon> getAllMoons() {
+    return new ArrayList<>(moons);
+  }
+
+  /**
+  * Two methods. One adds moon to the array list,
+  * one removes moon from arraylist.
+  */
+  public void addMoon(Moon moon) {
     moons.add(moon);
-    return moon;
+  }
+
+  public void removeMoon(Moon moon) {
+    moons.remove(moon);
   }
   
+  /**
+   * A getter and setter for avg orbit radius.
+   */
+
   public double getAvgOrbitRadiusInKm() {
     return avgOrbitRadiusInKm;
   }
-  
-  /**
-  * Returns array.
-  */
-  
-  public HeavenlyBody[] getHeavenlyBodies() {
-    HeavenlyBody[] copy = new HeavenlyBody[moons.size() + 1];
-    Planet copy2 = new Planet(getName(), getAvgRadiusInKm(), getAvgOrbitRadiusInKm());
-    copy[0] = copy2;
-    for (int i = 1; i < moons.size() + 1; ++i) {
-      Moon copies = new Moon(moons.get(i - 1).getName(), moons.get(i - 1).getAvgRadiusInKm(),
-      moons.get(i - 1).getAvgOrbitRadiusInKm());
-      copy[i] = copies;
+
+  private void setavgOrbitRadiusInKm(double avgOrbit) {
+    if (avgOrbit > 1000.0 || avgOrbit < 30000.0) {
+      this.avgOrbitRadiusInKm = avgOrbit;
+    } else {
+      throw new IllegalArgumentException("Choose another number so it doesnt collide");
     }
-    return copy;
   }
   
   @Override
@@ -72,21 +63,5 @@ public class Planet extends HeavenlyBody {
       throw new IllegalArgumentException("Radius is out of bounds!");
     }
   }
-  
-  /**
-  * Printing.
-  */
-  public String toString() {
-    String in = "Planet:" + getName() + " average radius " + getAvgRadiusInKm() + "km " + 
-    "average orbit radius " + getAvgOrbitRadiusInKm() + "km" + " \n ";
-    for (Moon i : moons) {
-      in += i;
-    }
-    return in;
-  }
-  public void removeMoon(Planet planet) {
-    for (Moon moon : planet.moons) {
-        moons.remove(moon);
-    }
-}
+
 }

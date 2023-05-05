@@ -4,6 +4,8 @@
 
 package assignment4;
 
+import java.util.Scanner;
+
 /**
  * This is the generated Hello World Greeting App.
  */
@@ -24,7 +26,70 @@ public class App {
    * @param args Unused program arguments.
    */
   public static void main(String[] args) {
-    App theApp = new App();
-    System.out.println(theApp.getGreeting());
+    
+    MethodsMenu methods = new MethodsMenu();
+    HandleFile handle = new HandleFile();
+
+    handle.initializeSystem();
+    handle.loadFromFile();
+    methods.setAllStars(handle.getFileArray());
+
+    //I load the file before starting the while loop.
+    Scanner scanner = new Scanner(System.in);
+    
+
+    while (true) {
+      System.out.println("1: add star");
+      System.out.println("2: remove star");
+      System.out.println("3: add planet");
+      System.out.println("4: remove planet");
+      System.out.println("5: add moon");
+      System.out.println("6: remove moon");
+      System.out.println("7: Save data");
+      System.out.println("8: Sort by size");
+      System.out.println("9: Sort by orbit");
+      System.out.println("10: Quit the application");
+
+      int num = scanner.nextInt();
+      scanner.nextLine();
+
+      switch (num) {
+        case 1:
+          methods.createStar(scanner);
+          break;
+        case 2:
+          methods.removeStar(scanner);
+          break;
+        case 3:
+          methods.createPlanet(scanner);
+          break;
+        case 4:
+          methods.removePlanet(scanner);
+          break;
+        case 5:
+          methods.createMoon(scanner);
+          break;
+        case 6:
+          methods.removeStar(scanner);
+          break;
+        case 7:
+          handle.setAllStars(methods.getAllStars());
+          handle.saveFile();
+          break;
+        case 8:
+          methods.sortBySize();
+          break;
+        case 9:
+          methods.sortByOrbit();
+          break;
+        case 10:
+          System.out.println("Thank you for using my app! May the 4th be with you.");
+          System.exit(0);
+          break;
+        default:
+          System.out.println("How did you even get here?");
+      }
+
+    }
   }
 }

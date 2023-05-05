@@ -10,12 +10,14 @@ public class Moon extends HeavenlyBody {
 
   protected Moon(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
     super(name, avgRadiusInKm);
-    setName(name);
-    checkAvgRadiusInKm(avgRadiusInKm);
-    if (avgOrbitRadiusInKm < 60) {
-      throw new IllegalArgumentException("Orbit radius is out of bounds!");
+    setavgOrbitRadiusInKm(avgOrbitRadiusInKm);
+  }
+
+  private void setavgOrbitRadiusInKm(double avgOrbit) {
+    if (avgOrbit > 6.0 || avgOrbit < 15000.0) {
+      this.avgOrbitRadiusInKm = avgOrbit;
     } else {
-      this.avgOrbitRadiusInKm = avgOrbitRadiusInKm;
+      throw new IllegalArgumentException("Choose another number so it doesnt collide");
     }
   }
 
@@ -28,9 +30,5 @@ public class Moon extends HeavenlyBody {
     if (radius < 6 || radius > 10000) {
       throw new IllegalArgumentException("Radius is out of bounds!");
     }
-  }
-
-  public String toString() {
-    return "--Moon:" + getName() + getAvgRadiusInKm() + getAvgOrbitRadiusInKm() +" \n ";
   }
 }

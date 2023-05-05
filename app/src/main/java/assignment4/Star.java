@@ -11,55 +11,40 @@ public class Star extends HeavenlyBody {
   private ArrayList<Planet> planets;
 
   /**
-   * Constructor for star
+   * Constructor for star.
    */
 
   public Star(String name, int avgRadiusInKm) {
     super(name, avgRadiusInKm);
-    setName(name);
-    checkAvgRadiusInKm(avgRadiusInKm);
-    planets = new ArrayList<Planet>();
-    new ArrayList<Moon>();
+    planets = new ArrayList<>();
   }
 
   /**
-   * Constructor for addPlanet.
+   * A getter for the planets arraylist.
    */
 
-  public Planet addPlanet(String name, int avgRadiusInKm, double avgOrbitRadiusInKm) {
-    Planet planet = new Planet(name, avgRadiusInKm, avgOrbitRadiusInKm);
-    planets.add(planet);
-    return planet;
+  public ArrayList<Planet> getAllPlanets() {
+    return new ArrayList<>(planets);
   }
 
   /**
-   * Returns all heavenly bodies present in this solar systems.
+   * Two methods that add and remove planets from the stars arraylist.
+   * Additionally, if a planet is removed, all of its moons get removed aswell.
    */
 
-  public HeavenlyBody[] getHeavenlyBodies() {
-    int length = planets.size() + 1;
-    for (Planet planium : planets) {
-      length += planium.moons.size();
+  public void addPlanet(Planet addedPlanet) {
+    planets.add(addedPlanet);
+  }
+  
+  /**
+   * Remove planet method that also removes the moons if planet
+   * is removed.
+   */
+  public void removePlanet(Planet planet) {
+    for (Moon moon : planet.getAllMoons()) {
+      planet.removeMoon(moon);
     }
-    HeavenlyBody[] copy = new HeavenlyBody[length];
-    Star cope = new Star(getName(), getAvgRadiusInKm());
-    copy[0] = cope;
-    int checkster = 1;
-    for (int i = 0; i < planets.size(); ++i) {
-      Planet copium = new Planet(planets.get(i).getName(), planets.get(i).getAvgRadiusInKm(),
-            planets.get(i).getAvgOrbitRadiusInKm());
-      copy[checkster] = copium;
-      checkster++;
-    }
-    for (Planet planium : planets) {
-      for (Moon moonioom : planium.moons) {
-        Moon copiummoon = new Moon(moonioom.getName(), moonioom.getAvgRadiusInKm(),
-            moonioom.getAvgOrbitRadiusInKm());
-        copy[checkster] = copiummoon;
-        checkster++;
-      }
-    }
-    return copy;
+    planets.remove(planet);
   }
 
   @Override
@@ -68,27 +53,5 @@ public class Star extends HeavenlyBody {
       throw new IllegalArgumentException("Radius is out of bounds!");
     }
   }
-
-  /**
-   * Printing
-   */
-  public String toString() {
-    String pin = getName() + getAvgRadiusInKm() + " \n "; 
-    for (Planet i : planets) {
-      pin += i;
-    }
-    return pin;
-  }
-
-  public void removeStar(Star star) {
-    for (Planet planet : star.planets) {
-        removePlanet(planet);
-    }
-    star = null;
-}
-public void removePlanet(Planet planet) {
-    planet.removeMoon(planet);
-    planets.remove(planet);
-}
 
 }
